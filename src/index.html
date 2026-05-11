@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutiek Budget</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Lutiek Budget</h1>
+            <div class="month-nav">
+                <button id="prevMonth">&lt;</button>
+                <span id="currentMonthLabel">Loading...</span>
+                <button id="nextMonth">&gt;</button>
+            </div>
+        </header>
+
+        <div class="summary-cards">
+            <div class="card income-card">
+                <span class="card-label">Income</span>
+                <span class="card-value" id="totalIncome">$0.00</span>
+            </div>
+            <div class="card expense-card">
+                <span class="card-label">Expenses</span>
+                <span class="card-value" id="totalExpenses">$0.00</span>
+            </div>
+            <div class="card balance-card">
+                <span class="card-label">Balance</span>
+                <span class="card-value" id="balance">$0.00</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="transactions-section">
+                <div class="section-header">
+                    <h2>Transactions</h2>
+                    <button id="addBtn" class="btn-add">+ Add</button>
+                </div>
+                <div id="transactionsList" class="transactions-list"></div>
+            </div>
+
+            <div class="chart-section">
+                <h2>Spending by Category</h2>
+                <div id="chartContainer" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Transaction</h3>
+                <button id="closeModal" class="btn-close">&times;</button>
+            </div>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label>Type</label>
+                    <div class="type-toggle">
+                        <button type="button" class="type-btn active" data-type="expense">Expense</button>
+                        <button type="button" class="type-btn" data-type="income">Income</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="amount" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="category" required>
+                        <option value="">Select category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="description" placeholder="Optional description">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn-cancel">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
