@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "identifier": "com.lutiek.budget",
   "build": {
-    "devtools": true,
     "frontendDist": "../src",
     "devUrl": "http://localhost:1420",
     "beforeDevCommand": "",
@@ -24,5 +23,10 @@
     "security": {
       "csp": null
     }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": []
   }
 }

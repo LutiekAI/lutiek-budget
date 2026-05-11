@@ -1,12 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use chrono::{DateTime, NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::PathBuf;
-use std::sync::Mutex;
-use tauri::State;
 use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -25,11 +22,6 @@ pub struct Transaction {
     pub category: String,
     pub description: String,
     pub date: String,
-}
-
-#[derive(Default)]
-pub struct AppState {
-    pub transactions: Mutex<Vec<Transaction>>,
 }
 
 fn get_data_file_path() -> PathBuf {
@@ -59,11 +51,7 @@ fn save_transactions(transactions: &[Transaction]) -> Result<(), String> {
 
 #[tauri::command]
 fn get_transactions() -> Result<Vec<Transaction>, String> {
-    let state: State<AppState> = tauri::State::new(AppState {
-        transactions: Mutex::new(load_transactions()),
-    });
-    let tx = state.transactions.lock().map_err(|e| e.to_string())?;
-    Ok(tx.clone())
+    Ok(load_transactions())
 }
 
 #[tauri::command]
